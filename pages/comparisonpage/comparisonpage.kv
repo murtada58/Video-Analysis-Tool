@@ -1,0 +1,202 @@
+#:kivy 2.0.0
+
+<ComparisonWindow>:
+    name: "ComparisonWindow"
+    image_add: image_add
+    canvas.before:
+        Color: 
+            rgba: 0.15, 0.15, 0.15, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: 10
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_x: 0.5
+            canvas.before:
+                Color: 
+                    rgba: 0.24, 0.24, 0.24, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                size_hint_y: None
+                height: 50
+                font_size: 24
+                text_size: self.width, None
+                halign: 'center'
+                text: "Comparison Images"
+            ScrollView:
+                GridLayout:
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: [0, 5]
+                    id: image_add
+
+            Button:
+                pos_hint: {"x": 0, "y": 0}
+                size_hint: 1, None
+                height: 50
+                font_size: 24
+                text_size: self.width, None
+                halign: 'center'
+                text: "Add Image"
+                on_press: root.open_popup()
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_x: 0.5
+            canvas.before:
+                Color: 
+                    rgba: 0.24, 0.24, 0.24, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: 50
+                #canvas.before:
+                #    Color: 
+                #        rgba: 0.2, 0.2, 0.2, 1
+                #    Rectangle:
+                #        pos: self.pos
+                #        size: self.size
+                Label:
+                    id: current_project
+                    size_hint_y: None
+                    height: 50
+                    font_size: 24
+                    text_size: self.width, None
+                    halign: 'right'
+                    text: "the current project"
+                Label:
+                    size_hint_y: None
+                    height: 50
+                    font_size: 24
+                    text_size: self.width, None
+                    halign: 'left'
+                    text: ": Settings"
+
+            ScrollView:
+                GridLayout:
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: [0, 5]
+                    padding: 10
+                    GridLayout:
+                        size_hint: (1, None)
+                        cols: 2
+                        height: 32
+                        Label:
+                            canvas.before:
+                                Color: 
+                                    rgba: 0.45, 0.45, 0.45, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            size_hint_x: None
+                            width: self.texture_size[0] + self.font_size
+                            font_size: 16
+                            text: "FPS:"
+                        TextInput:
+                            id: fps 
+                            multiline: False
+                            background_normal: ""
+                            background_active: ""
+                            font_size: 16
+                            text_size: self.width - 10, None
+                            text: "30"
+                            on_text: print(self.text)
+                    GridLayout:
+                        size_hint: (1, None)
+                        cols: 2
+                        height: 32
+                        Label:
+                            canvas.before:
+                                Color: 
+                                    rgba: 0.45, 0.45, 0.45, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            size_hint_x: None
+                            width: self.texture_size[0] + self.font_size
+                            font_size: 16
+                            text: "Analysed Frames:"
+                        Label:
+                            id: analysed_frames
+                            canvas.before:
+                                Color: 
+                                    rgba: 1, 1, 1, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            size_hint_x: None
+                            width: self.texture_size[0] + self.font_size
+                            font_size: 16
+                            color: (0, 0, 0, 1)
+                            text: "0"
+                    GridLayout:
+                        size_hint: (1, None)
+                        cols: 2
+                        height: 32
+                        Label:
+                            canvas.before:
+                                Color: 
+                                    rgba: 0.45, 0.45, 0.45, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            size_hint_x: None
+                            width: self.texture_size[0] + self.font_size
+                            font_size: 16
+                            text: "Total Frames:"
+                        Label:
+                            id: total_frames
+                            canvas.before:
+                                Color: 
+                                    rgba: 1, 1, 1, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            size_hint_x: None
+                            width: self.texture_size[0] + self.font_size
+                            font_size: 16
+                            color: (0, 0, 0, 1)
+                            text: "0"
+                    GridLayout:
+                        size_hint: (1, None)
+                        cols: 2
+                        height: 32
+                        Button:
+                            id: face_recog
+                            canvas.before:
+                                Color: 
+                                    rgba: 0.45, 0.45, 0.45, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            size_hint_x: None
+                            width: self.texture_size[0] + self.font_size
+                            font_size: 16
+                            text: "Face Recog: ON (Permanently on for now)"
+                            on_press:
+                                print(self.text) # change this to call function to save on click
+                                #self.text = "Face Recog: OFF" if self.text == "Face Recog: ON" else "Face Recog: ON"
+
+            Button:
+                pos_hint: {"x": 0, "y": 0}
+                size_hint: 1, None
+                height: 50
+                font_size: 24
+                text_size: self.width, None
+                halign: 'center'
+                text: "Start Analysis"
+                on_press: 
+                    #root.on_start_button()
+                    app.root.current = "AnalysisWindow"
+                    root.manager.transition.direction = "up"

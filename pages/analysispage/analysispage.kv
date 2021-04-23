@@ -1,0 +1,329 @@
+#:kivy 2.0.0
+
+<AnalysisWindow>:
+    name: "AnalysisWindow"
+    image_add: image_add
+    current_image: current_image
+    canvas.before:
+        Color: 
+            rgba: 0.15, 0.15, 0.15, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        cols: 1
+        GridLayout:
+            rows: 1
+            spacing: [10, 5]
+            padding: 10
+            GridLayout:
+                cols: 1
+                size_hint_x: 0.25
+                canvas.before:
+                    Color: 
+                        rgba: 0.25, 0.25, 0.25, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                Label:
+                    size_hint_y: None
+                    height: 50
+                    font_size: 24
+                    text_size: self.width, None
+                    halign: 'center'
+                    text: "Statistics"
+                ScrollView:
+                    GridLayout:
+                        cols: 1
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: [0, 5]
+                        padding: 10
+                        GridLayout:
+                            size_hint: (1, None)
+                            cols: 2
+                            height: 32
+                            Label:
+                                canvas.before:
+                                    Color: 
+                                        rgba: 0.45, 0.45, 0.45, 1
+                                    Rectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                size_hint_x: None
+                                width: self.texture_size[0] + self.font_size
+                                font_size: 16
+                                text: "Face distance:"
+                            Label:
+                                id: face_distance
+                                canvas.before:
+                                    Color: 
+                                        rgba: 0.35, 0.35, 0.35, 1
+                                    Rectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                size_hint_x: None
+                                width: self.texture_size[0] + self.font_size
+                                font_size: 16
+                                text: "NA"
+                        # GridLayout:
+                        #     size_hint: (1, None)
+                        #     cols: 2
+                        #     height: 32
+                        #     Label:
+                        #         canvas.before:
+                        #             Color: 
+                        #                 rgba: 0.45, 0.45, 0.45, 1
+                        #             Rectangle:
+                        #                 pos: self.pos
+                        #                 size: self.size
+                        #         size_hint_x: None
+                        #         width: self.texture_size[0] + self.font_size
+                        #         font_size: 16
+                        #         text: "FPS:"
+                        #     Label:
+                        #         canvas.before:
+                        #             Color: 
+                        #                 rgba: 0.35, 0.35, 0.35, 1
+                        #             Rectangle:
+                        #                 pos: self.pos
+                        #                 size: self.size
+                        #         size_hint_x: None
+                        #         width: self.texture_size[0] + self.font_size
+                        #         font_size: 16
+                        #         text: "30"
+
+            #VideoPlayer:
+            #    size_hint_x: 0.5
+            #    source: "./test_videos/bill_gates.mp4"
+            Image:
+                size_hint_x: 0.5
+                id: video_player
+
+            GridLayout:
+                cols: 1
+                size_hint_x: 0.25
+                canvas.before:
+                    Color: 
+                        rgba: 0.25, 0.25, 0.25, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                Label:
+                    size_hint_y: None
+                    height: 50
+                    font_size: 24
+                    text_size: self.width, None
+                    halign: 'center'
+                    text: "Comparison Images"
+                ScrollView:
+                    GridLayout:
+                        cols: 1
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: [0, 5]
+                        id: image_add
+        GridLayout:
+            size_hint_y: None
+            height: 52
+            cols: 1
+            canvas.before:
+                Color: 
+                    rgba: 0.25, 0.25, 0.25, 1
+                Rectangle:
+                    pos: [self.pos[0] + 10, self.pos[1] + 10]
+                    size: [self.size[0] - 20, self.size[1] - 10]
+            ScrollView:
+                GridLayout:
+                    rows: 1
+                    size_hint: (None, None)
+                    spacing: [5, 0]
+                    padding: [15, 5, 15, 15]
+                    width: self.minimum_width
+                    height: 52
+                    GridLayout:
+                        size_hint: (None, None)
+                        cols: 2
+                        width: self.minimum_width
+                        height: 32
+                        Label:
+                            canvas.before:
+                                Color: 
+                                    rgba: 0.45, 0.45, 0.45, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            size_hint_x: None
+                            width: self.texture_size[0] + self.font_size
+                            font_size: 16
+                            text: "FPS:"
+                        Label:
+                            id: fps
+                            canvas.before:
+                                Color: 
+                                    rgba: 0.35, 0.35, 0.35, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            size_hint_x: None
+                            width: self.texture_size[0] + self.font_size
+                            font_size: 16
+                            text: "30"
+                    GridLayout:
+                        size_hint: (None, None)
+                        cols: 2
+                        width: self.minimum_width
+                        height: 32
+                        Label:
+                            canvas.before:
+                                Color: 
+                                    rgba: 0.45, 0.45, 0.45, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            size_hint_x: None
+                            width: self.texture_size[0] + self.font_size
+                            font_size: 16
+                            text: "Current Frame:"
+                        TextInput:
+                            id: current_frame
+                            size_hint_x: None
+                            multiline: False
+                            width: ((len(self.text) + 2) * self.font_size) / 1.75
+                            font_size: 16
+                            on_text_validate: print("check")
+                            on_focus: print(self.focus) 
+                            text: "0"
+
+                    GridLayout:
+                        size_hint: (None, None)
+                        cols: 2
+                        width: self.minimum_width
+                        height: 32
+                        Label:
+                            canvas.before:
+                                Color: 
+                                    rgba: 0.45, 0.45, 0.45, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            size_hint_x: None
+                            width: self.texture_size[0] + self.font_size
+                            font_size: 16
+                            text: "Working On Frame:"
+                        Label:
+                            id: working_frame
+                            canvas.before:
+                                Color: 
+                                    rgba: 0.35, 0.35, 0.35, 1
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                            size_hint_x: None
+                            width: self.texture_size[0] + self.font_size
+                            font_size: 16
+                            text: "0"
+                    Spinner:
+                        id: current_image
+                        size_hint: (None, None)
+                        cols: 2
+                        width: 200
+                        height: 32
+                        #text: "Image1"
+                        #values: "Image1", "Image2", "Image34324"
+                        on_text: root.change_current_image(self.text)
+
+                    Button:
+                        size_hint: (None, None)
+                        width: 125
+                        height: 32
+                        text: "Start analysis"
+                        on_press: root.analysis(self)
+
+        GridLayout:
+            rows: 1
+            id: color_bar
+            size_hint: (1, None)
+            padding: (20, 0, 20 , 0)
+            spacing: (1, 0)
+            height: 25
+
+        MySlider:
+            id: frame_seeker
+            size_hint: (1, None)
+            height: 50
+            range: (0, 1000)
+            on_value: on_value: root.on_slider_val_change(int(self.value))
+
+        GridLayout:
+            rows: 1
+            size_hint: (None, None)
+            spacing: [5, 0]
+            padding: [15, 5, 15, 15]
+            pos: [(root.width/2) - (self.width/2), self.pos[1]]
+            width: 40 * 5
+            height: 50
+            canvas.before:
+                Color: 
+                    rgba: 0.25, 0.25, 0.25, 1
+                Rectangle:
+                    pos: [self.pos[0] + 10, self.pos[1] + 10]
+                    size: [self.size[0] - 20, self.size[1] - 10]
+            Button:
+                width: self.height
+                background_color: (1, 1, 1, 0)
+                on_press: root.control_buttons("slow_down")
+                Image:
+                    source: "./images/slow_down.png"
+                    width: self.parent.width
+                    height: self.parent.height
+                    pos: self.parent.pos
+            Button:
+                width: self.height
+                background_color: (1, 1, 1, 0)
+                on_press: root.control_buttons("replay")
+                Image:
+                    source: "./images/replay.png"
+                    width: self.parent.width
+                    height: self.parent.height
+                    pos: self.parent.pos
+            Button:
+                width: self.height
+                background_color: (1, 1, 1, 0)
+                on_press: root.control_buttons("play")
+                Image:
+                    source: "./images/play.png"
+                    width: self.parent.width
+                    height: self.parent.height
+                    pos: self.parent.pos
+            Button:
+                width: self.height
+                background_color: (1, 1, 1, 0)
+                on_press: print("pause")
+                Image:
+                    source: "./images/pause.png"
+                    width: self.parent.width
+                    height: self.parent.height
+                    pos: self.parent.pos
+            Button:
+                width: self.height
+                background_color: (1, 1, 1, 0)
+                on_press: root.control_buttons("speed_up")
+                Image:
+                    source: "./images/speed_up.png"
+                    width: self.parent.width
+                    height: self.parent.height
+                    pos: self.parent.pos
+
+
+
+<MySlider@Slider>:
+    cursor_image: "./images/cursor4.png"
+    cursor_size: (32, 32)
+    cursor_pos: (self.pos[0], self.pos[1] + 50)
+    Label:
+        pos: (root.value_pos[0] - sp(16), root.center_y - sp(32)) if root.orientation == 'horizontal' else (root.center_x - sp(27), root.value_pos[1] - sp(32))
+        size_hint: None, None
+        size: sp(32), sp(32)
+        text: str(int(root.value))      

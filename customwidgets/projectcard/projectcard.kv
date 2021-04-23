@@ -1,0 +1,40 @@
+#:kivy 2.0.0
+<ProjectCard>
+    cols: 3
+    canvas.before:
+        Color: 
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Image:
+        id: image
+        size_hint_x: None
+        width: self.height * (16/9)
+    GridLayout:
+        cols: 1
+        Button:
+            id: name_label
+            background_color: (0.45, 0.45, 0.45, 1)
+            background_normal: ""
+            on_press: root.selected()
+            text_size: self.width - 10, None
+            text: "Name:"
+        TextInput:
+            id: name
+            multiline: False
+            background_normal: "./images/white.png"
+            background_active: "./images/white.png"
+            text_size: self.width - 10, None
+            #on_text: root.on_text()
+            on_focus: root.name_change(self.focus)
+            text: "Test Name"
+    Button:
+        size_hint_x: None
+        font_size: 32
+        width: self.font_size * 1
+        background_normal: ""
+        background_color: (0.8, 0.25, 0.25, 1)
+        on_release: root.remove()
+        text: "X"

@@ -1,0 +1,47 @@
+#:kivy 2.0.0
+<ComparisonCard>
+    cols: 3
+    canvas.before:
+        Color: 
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Image:
+        id: image
+        size_hint_x: None
+        width: self.height
+        source: ""
+    GridLayout:
+        cols: 1
+        Label:
+            canvas.before:
+                Color: 
+                    rgba: 0.45, 0.45, 0.45, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            text_size: self.width - 10, None
+            text: "Name:"
+        TextInput:
+            id: name
+            multiline: False
+            background_normal: ""
+            background_active: ""
+            text_size: self.width - 10, None
+            #on_text: root.on_text()
+            on_focus: root.name_change(self.focus)
+            text: "Test Name"
+    Button:
+        size_hint_x: None
+        font_size: 32
+        width: self.font_size * 1
+        canvas.before:
+            Color: 
+                rgba: 0.8, 0.25, 0.25, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        background_color: (1, 1, 1, 0)
+        on_release: root.remove()
+        text: "X"
